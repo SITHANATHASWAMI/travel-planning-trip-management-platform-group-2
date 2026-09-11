@@ -16,10 +16,6 @@ RUN ./mvnw package -DskipTests -q
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Non-root user for security
-RUN addgroup -S tripnest && adduser -S tripnest -G tripnest
-USER tripnest
-
 # Upload directory (documents/photos)
 RUN mkdir -p uploads/documents
 
@@ -29,5 +25,5 @@ EXPOSE 8080
 
 ENTRYPOINT ["java", \
   "-Djava.security.egd=file:/dev/./urandom", \
-  "-Dspring.profiles.active=${APP_PROFILE:local}", \
+  "-Dspring.profiles.active=${APP_PROFILE:-postgres}", \
   "-jar", "app.jar"]
