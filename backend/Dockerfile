@@ -21,7 +21,4 @@ COPY --from=builder /app/target/tripnest-backend-0.1.0.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", \
-  "-Djava.security.egd=file:/dev/./urandom", \
-  "-Dspring.profiles.active=${APP_PROFILE:-postgres}", \
-  "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=${APP_PROFILE:-postgres} -jar app.jar"]
