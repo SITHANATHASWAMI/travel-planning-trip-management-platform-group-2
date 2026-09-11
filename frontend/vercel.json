@@ -6,7 +6,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://tripnest-backend.onrender.com/api/$1"
+      "dest": "https://backend-production-8a24f.up.railway.app/api/$1"
     },
     {
       "src": "^/static/(.*)",
@@ -21,11 +21,11 @@
     }
   ],
   "env": {
-    "REACT_APP_API_BASE_URL": "https://tripnest-backend.onrender.com/api"
+    "REACT_APP_API_BASE_URL": "https://backend-production-8a24f.up.railway.app/api"
   },
   "build": {
     "env": {
-      "REACT_APP_API_BASE_URL": "https://tripnest-backend.onrender.com/api"
+      "REACT_APP_API_BASE_URL": "https://backend-production-8a24f.up.railway.app/api"
     }
   }
 }
