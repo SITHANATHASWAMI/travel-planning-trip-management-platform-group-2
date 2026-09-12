@@ -1171,7 +1171,7 @@ export default function TripDetail() {
                       </p>
                     </div>
                     <div className="flex items-center gap-1 flex-shrink-0">
-                      <a href={`${process.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api"}${doc.fileUrl}`}
+                      <a href={`${(process.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api").replace(/\/api$/, "")}${doc.fileUrl}`}
                         target="_blank" rel="noreferrer"
                         className="text-xs text-brand-600 border border-brand-200 hover:bg-brand-50 px-2 py-1 rounded-lg">
                         View
