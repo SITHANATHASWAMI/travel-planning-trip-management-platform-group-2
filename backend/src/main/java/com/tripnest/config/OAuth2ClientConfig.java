@@ -41,7 +41,7 @@ public class OAuth2ClientConfig {
                 .clientSecret(googleOAuthConfig.getClientSecret())
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
+                .redirectUri("https://backend-production-8a24f.up.railway.app/login/oauth2/code/google")
                 .scope("openid", "profile", "email")
                 .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
                 .tokenUri("https://oauth2.googleapis.com/token")
