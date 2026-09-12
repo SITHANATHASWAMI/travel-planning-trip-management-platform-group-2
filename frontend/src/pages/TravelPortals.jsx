@@ -149,22 +149,22 @@ const PORTALS = {
 };
 
 const TABS = [
-  { id: "train",  label: "Train",    icon: "🚂", color: "blue"   },
-  { id: "flight", label: "Flights",  icon: "✈️", color: "indigo" },
-  { id: "bus",    label: "Bus",      icon: "🚌", color: "green"  },
-  { id: "other",  label: "Other",    icon: "🗺️", color: "purple" },
+  { id: "train", label: "Train", icon: "🚂", color: "blue" },
+  { id: "flight", label: "Flights", icon: "✈️", color: "indigo" },
+  { id: "bus", label: "Bus", icon: "🚌", color: "green" },
+  { id: "other", label: "Other", icon: "🗺️", color: "purple" },
 ];
 
 const COLOR_MAP = {
-  blue:   { bg: "bg-blue-50",   border: "border-blue-200",   icon: "bg-blue-100 text-blue-600",   badge: "bg-blue-100 text-blue-700",   btn: "bg-blue-600 hover:bg-blue-700",   tab: "border-blue-600 text-blue-700 bg-blue-50" },
+  blue: { bg: "bg-blue-50", border: "border-blue-200", icon: "bg-blue-100 text-blue-600", badge: "bg-blue-100 text-blue-700", btn: "bg-blue-600 hover:bg-blue-700", tab: "border-blue-600 text-blue-700 bg-blue-50" },
   indigo: { bg: "bg-indigo-50", border: "border-indigo-200", icon: "bg-indigo-100 text-indigo-600", badge: "bg-indigo-100 text-indigo-700", btn: "bg-indigo-600 hover:bg-indigo-700", tab: "border-indigo-600 text-indigo-700 bg-indigo-50" },
-  green:  { bg: "bg-green-50",  border: "border-green-200",  icon: "bg-green-100 text-green-600",  badge: "bg-green-100 text-green-700",  btn: "bg-green-600 hover:bg-green-700",  tab: "border-green-600 text-green-700 bg-green-50" },
+  green: { bg: "bg-green-50", border: "border-green-200", icon: "bg-green-100 text-green-600", badge: "bg-green-100 text-green-700", btn: "bg-green-600 hover:bg-green-700", tab: "border-green-600 text-green-700 bg-green-50" },
   purple: { bg: "bg-purple-50", border: "border-purple-200", icon: "bg-purple-100 text-purple-600", badge: "bg-purple-100 text-purple-700", btn: "bg-purple-600 hover:bg-purple-700", tab: "border-purple-600 text-purple-700 bg-purple-50" },
 };
 
 export default function TravelPortals() {
   const [activeTab, setActiveTab] = useState("train");
-  const [search, setSearch]       = useState("");
+  const [search, setSearch] = useState("");
 
   const portals = PORTALS[activeTab] || [];
   const filtered = portals.filter(p =>
@@ -172,8 +172,6 @@ export default function TravelPortals() {
     p.description.toLowerCase().includes(search.toLowerCase()) ||
     p.tag.toLowerCase().includes(search.toLowerCase())
   );
-
-  const tabColor = TABS.find(t => t.id === activeTab)?.color || "blue";
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -210,11 +208,10 @@ export default function TravelPortals() {
             <button
               key={tab.id}
               onClick={() => { setActiveTab(tab.id); setSearch(""); }}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border-2 transition-all ${
-                active
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border-2 transition-all ${active
                   ? `${c.tab} border-current`
                   : "border-transparent text-slate-600 bg-slate-100 hover:bg-slate-200"
-              }`}
+                }`}
             >
               <span>{tab.icon}</span>
               {tab.label}
@@ -276,7 +273,7 @@ export default function TravelPortals() {
       <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 flex gap-2">
         <span className="text-base flex-shrink-0">⚠️</span>
         <span>
-          These are links to official government and public transport portals. TripNest does not manage bookings — 
+          These are links to official government and public transport portals. TripNest does not manage bookings —
           you will be redirected to the respective external websites. Always verify URLs before entering personal information.
         </span>
       </div>
