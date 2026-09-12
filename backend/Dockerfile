@@ -6,7 +6,8 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline -q
 
-# Copy source and build
+# Copy source and build (cache bust on every deploy)
+ARG CACHE_BUST=1
 COPY src src
 RUN mvn package -DskipTests -q
 
@@ -14,7 +15,6 @@ RUN mvn package -DskipTests -q
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Upload directory (documents/photos)
 RUN mkdir -p uploads/documents
 
 COPY --from=builder /app/target/tripnest-backend-0.1.0.jar app.jar
