@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { authApi } from "../api/authApi";
 
-const GOOGLE_AUTH_URL = "http://localhost:8080/oauth2/authorization/google";
+const BACKEND_URL = process.env.REACT_APP_API_BASE_URL
+  ? process.env.REACT_APP_API_BASE_URL.replace("/api", "")
+  : "https://backend-production-8a24f.up.railway.app";
+
+const GOOGLE_AUTH_URL = `${BACKEND_URL}/oauth2/authorization/google`;
 
 export default function GoogleLoginButton() {
   const [status, setStatus] = useState("loading"); // loading | enabled | disabled

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
 /* Strength config */
 const STRENGTH_LEVELS = [
@@ -328,9 +329,8 @@ export default function Register() {
                     {[1, 2, 3, 4, 5].map((n) => (
                       <div
                         key={n}
-                        className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${
-                          n <= strength ? strengthInfo.color : "bg-slate-200"
-                        }`}
+                        className={`h-1.5 flex-1 rounded-full transition-all duration-300 ${n <= strength ? strengthInfo.color : "bg-slate-200"
+                          }`}
                       />
                     ))}
                   </div>
@@ -388,11 +388,10 @@ export default function Register() {
                   onChange={(e) => setAgreed(e.target.checked)}
                 />
                 <div
-                  className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
-                    agreed
-                      ? "bg-brand-600 border-brand-600"
-                      : "border-slate-300 group-hover:border-brand-400"
-                  }`}
+                  className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${agreed
+                    ? "bg-brand-600 border-brand-600"
+                    : "border-slate-300 group-hover:border-brand-400"
+                    }`}
                 >
                   {agreed && (
                     <span className="text-white text-[10px] font-bold">✓</span>
@@ -454,6 +453,9 @@ export default function Register() {
             </button>
           </form>
 
+          {/* Google Sign-In */}
+          <GoogleLoginButton />
+
           {/* Login link */}
           <p className="text-sm text-slate-500 mt-5 text-center">
             Already have an account?{" "}
@@ -478,11 +480,10 @@ export default function Register() {
 /* ─── Helpers ────────────────────────────────────────────────── */
 
 function inputCls(err) {
-  return `w-full pl-10 pr-11 py-3 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 ${
-    err
-      ? "border-red-300 focus:ring-red-200 bg-red-50"
-      : "border-slate-200 focus:ring-brand-200 focus:border-brand-400 bg-white"
-  }`;
+  return `w-full pl-10 pr-11 py-3 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 ${err
+    ? "border-red-300 focus:ring-red-200 bg-red-50"
+    : "border-slate-200 focus:ring-brand-200 focus:border-brand-400 bg-white"
+    }`;
 }
 
 function Field({ label, required, hint, error, children }) {
