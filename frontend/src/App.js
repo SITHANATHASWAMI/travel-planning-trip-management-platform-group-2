@@ -21,6 +21,7 @@ import Groups from "./pages/Groups";
 import GroupDetail from "./pages/Groupdetail";
 import Notifications from "./pages/Notifications";
 import AdminDashboard from "./pages/AdminDashboard";
+import TravelPortals from "./pages/TravelPortals";
 
 function App() {
   return (
@@ -133,6 +134,14 @@ function App() {
             element={
               <PrivateRoute>
                 <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/portals"
+            element={
+              <PrivateRoute>
+                <TravelPortals />
               </PrivateRoute>
             }
           />

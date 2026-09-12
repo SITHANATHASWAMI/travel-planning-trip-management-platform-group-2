@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { to: "/trips", label: "My Trips", icon: "🗺️" },
   { to: "/destinations", label: "Explore", icon: "🌍" },
   { to: "/groups", label: "Groups", icon: "👥" },
+  { to: "/portals", label: "Portals", icon: "🎫" },
 ];
 
 export default function Navbar() {
