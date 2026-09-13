@@ -3,6 +3,8 @@ backend/target/
 *.class
 *.jar
 !maven-wrapper.jar
+backend/.env.local
+backend/.env
 
 # Frontend (React/Node)
 frontend/node_modules/
