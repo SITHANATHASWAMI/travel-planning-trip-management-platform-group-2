@@ -1,5 +1,6 @@
 package com.tripnest.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
@@ -10,13 +11,13 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 
-import java.util.Collections;
-import java.util.Iterator;
-
 @Configuration
 public class OAuth2ClientConfig {
 
     private final GoogleOAuthConfig googleOAuthConfig;
+
+    @Value("${app.backend.url:http://localhost:8080}")
+    private String backendUrl;
 
     public OAuth2ClientConfig(GoogleOAuthConfig googleOAuthConfig) {
         this.googleOAuthConfig = googleOAuthConfig;
@@ -25,23 +26,18 @@ public class OAuth2ClientConfig {
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
         if (!googleOAuthConfig.enabled()) {
-            // Return a proper empty repository that never throws NPE.
-            // Spring's OAuth2 filter initializes cleanly; no real auth flow
-            // is possible until real credentials are configured.
-            return new ClientRegistrationRepository() {
-                @Override
-                public ClientRegistration findByRegistrationId(String registrationId) {
-                    return null; // no registrations
-                }
-            };
+            return registrationId -> null;
         }
+
+        // Use explicit redirect URI to avoid proxy/baseUrl resolution issues
+        String redirectUri = backendUrl + "/login/oauth2/code/google";
 
         ClientRegistration registration = ClientRegistration.withRegistrationId("google")
                 .clientId(googleOAuthConfig.getClientId())
                 .clientSecret(googleOAuthConfig.getClientSecret())
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
+                .redirectUri(redirectUri)
                 .scope("openid", "profile", "email")
                 .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
                 .tokenUri("https://oauth2.googleapis.com/token")

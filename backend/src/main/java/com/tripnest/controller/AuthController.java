@@ -29,13 +29,17 @@ public class AuthController {
         this.googleOAuthConfig = googleOAuthConfig;
     }
 
+    /**
+     * Health check / keep-alive endpoint.
+     * Also used by GoogleLoginButton to check if OAuth is enabled.
+     */
     @GetMapping("/oauth-enabled")
     public ResponseEntity<Map<String, Object>> oauthEnabled() {
         boolean enabled = googleOAuthConfig.enabled();
-        String reason = enabled ? "" : "Google OAuth is not configured or credentials are invalid.";
         return ResponseEntity.ok(Map.of(
                 "enabled", enabled,
-                "reason", reason
+                "status", "ok",
+                "reason", enabled ? "" : "Google OAuth not configured."
         ));
     }
 

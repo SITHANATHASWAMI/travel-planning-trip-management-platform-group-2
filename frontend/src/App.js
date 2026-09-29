@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import axiosClient from "./api/axiosClient";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -24,6 +25,14 @@ import AdminDashboard from "./pages/AdminDashboard";
 import TravelPortals from "./pages/TravelPortals";
 
 function App() {
+  // Keep Railway backend awake — ping every 4 minutes
+  useEffect(() => {
+    const ping = () => axiosClient.get("/auth/oauth-enabled").catch(() => {});
+    ping(); // immediate ping on load
+    const id = setInterval(ping, 4 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <AuthProvider>
       <BrowserRouter>
