@@ -66,8 +66,10 @@ export default function WeatherWidget({ city, compact = false }) {
 
   useEffect(() => { load(); }, [load]);
 
-  // No API key → hide silently
-  if (status === "no-key") return null;
+  // No API key or idle (no city yet) → hide silently
+  if (status === "no-key" || status === "idle") return null;
+  // No weather data yet and not in a known render state → hide
+  if (status === "ok" && !weather) return null;
 
   /* ── Compact badge (used inside Destination cards) ── */
   if (compact) {

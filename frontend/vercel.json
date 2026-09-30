@@ -1,23 +1,18 @@
 {
   "version": 2,
-  "name": "tripnest-frontend",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://tripnest-backend.onrender.com/api/$1"
+      "dest": "https://backend-production-8a24f.up.railway.app/api/$1"
     },
     {
       "src": "^/static/(.*)",
-      "headers": { "cache-control": "public, max-age=31536000, immutable" },
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
       "dest": "/static/$1"
     },
     {
@@ -26,11 +21,11 @@
     }
   ],
   "env": {
-    "REACT_APP_API_BASE_URL": "https://tripnest-backend.onrender.com/api"
+    "REACT_APP_API_BASE_URL": "https://backend-production-8a24f.up.railway.app/api"
   },
   "build": {
     "env": {
-      "REACT_APP_API_BASE_URL": "https://tripnest-backend.onrender.com/api"
+      "REACT_APP_API_BASE_URL": "https://backend-production-8a24f.up.railway.app/api"
     }
   }
 }

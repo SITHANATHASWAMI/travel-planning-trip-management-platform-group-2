@@ -37,8 +37,8 @@ public class TripController {
     }
 
     @GetMapping("/summary")
-    public Map<String, Object> getTripSummary() {
-        return tripService.getTripSummary();
+    public Map<String, Object> getTripSummary(@AuthenticationPrincipal UserPrincipal principal) {
+        return tripService.getTripSummary(principal.getUsername());
     }
 
     @GetMapping("/{id}")

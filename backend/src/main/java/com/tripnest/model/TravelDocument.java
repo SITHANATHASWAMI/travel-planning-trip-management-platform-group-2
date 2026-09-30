@@ -29,6 +29,9 @@ public class TravelDocument {
     @Column(nullable = false, length = 300)
     private String fileUrl;          // local path or cloud URL
 
+    @Column(length = 300)
+    private String cloudinaryPublicId; // Cloudinary public_id for deletion
+
     @Column(nullable = false, length = 100)
     private String contentType;      // e.g. application/pdf, image/jpeg
 
@@ -58,6 +61,8 @@ public class TravelDocument {
     public void setFileName(String s)             { this.fileName = s; }
     public String getFileUrl()                    { return fileUrl; }
     public void setFileUrl(String s)              { this.fileUrl = s; }
+    public String getCloudinaryPublicId()         { return cloudinaryPublicId; }
+    public void setCloudinaryPublicId(String s)   { this.cloudinaryPublicId = s; }
     public String getContentType()                { return contentType; }
     public void setContentType(String s)          { this.contentType = s; }
     public Long getFileSize()                     { return fileSize; }

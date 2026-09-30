@@ -1,33 +1,24 @@
 # ── Stage 1: Build ──────────────────────────────────────────
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM maven:3.9-eclipse-temurin-21-alpine AS builder
 WORKDIR /app
 
-# Copy Maven wrapper + pom first (layer cache)
-COPY mvnw .
-COPY .mvn .mvn
+# Copy pom first for dependency caching
 COPY pom.xml .
-RUN chmod +x mvnw && ./mvnw dependency:go-offline -q
+RUN mvn dependency:go-offline -q
 
-# Copy source and build
+# Copy source and build (cache bust on every deploy)
+ARG CACHE_BUST=1
 COPY src src
-RUN ./mvnw package -DskipTests -q
+RUN mvn package -DskipTests -q
 
 # ── Stage 2: Run ─────────────────────────────────────────────
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Non-root user for security
-RUN addgroup -S tripnest && adduser -S tripnest -G tripnest
-USER tripnest
-
-# Upload directory (documents/photos)
 RUN mkdir -p uploads/documents
 
 COPY --from=builder /app/target/tripnest-backend-0.1.0.jar app.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", \
-  "-Djava.security.egd=file:/dev/./urandom", \
-  "-Dspring.profiles.active=${APP_PROFILE:local}", \
-  "-jar", "app.jar"]
+ENTRYPOINT ["sh", "-c", "java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=${APP_PROFILE:-postgres} -jar app.jar"]

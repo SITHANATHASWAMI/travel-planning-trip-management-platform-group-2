@@ -43,10 +43,10 @@ public class ItineraryItem {
     @Column(length = 1000)
     private String notes;
 
-    @Column(columnDefinition = "DOUBLE")
+    @Column(columnDefinition = "DOUBLE PRECISION")
     private Double lat;
 
-    @Column(columnDefinition = "DOUBLE")
+    @Column(columnDefinition = "DOUBLE PRECISION")
     private Double lng;
 
     @Column(updatable = false)
