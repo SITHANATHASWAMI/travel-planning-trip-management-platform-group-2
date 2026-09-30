@@ -97,20 +97,20 @@ export default function Navbar() {
                 )}
               </Link>
 
-              {/* Profile */}
-              <div className="hidden sm:flex items-center gap-1 pl-3 border-l border-slate-200">
+              {/* Profile — show name on sm+, avatar always */}
+              <div className="flex items-center gap-1 pl-2 sm:pl-3 border-l border-slate-200">
                 <Link
                   to="/profile"
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-700 hover:bg-slate-50 transition-colors"
+                  className="flex items-center gap-2 px-2 sm:px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-700 hover:bg-slate-50 transition-colors"
                 >
-                  <span className="w-7 h-7 rounded-full bg-brand-100 text-brand-700 font-bold text-xs flex items-center justify-center">
+                  <span className="w-7 h-7 rounded-full bg-brand-100 text-brand-700 font-bold text-xs flex items-center justify-center flex-shrink-0">
                     {user.fullName?.[0]?.toUpperCase() || "U"}
                   </span>
-                  {user.fullName?.split(" ")[0]}
+                  <span className="hidden sm:inline">{user.fullName?.split(" ")[0]}</span>
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="text-sm font-medium text-red-600 hover:text-red-700 px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors"
+                  className="hidden sm:block text-sm font-medium text-red-600 hover:text-red-700 px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors"
                 >
                   Logout
                 </button>

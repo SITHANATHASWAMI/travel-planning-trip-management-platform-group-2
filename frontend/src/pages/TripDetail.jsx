@@ -518,16 +518,16 @@ export default function TripDetail() {
 
 
       {/* ── Tabs ── */}
-      <div className="flex border-b border-slate-200 mb-6 gap-1 overflow-x-auto">
+      <div className="flex border-b border-slate-200 mb-6 gap-0.5 overflow-x-auto scrollbar-hide -mx-1 px-1">
         {TABS.map(t => (
           <button key={t.id} onClick={() => setActiveTab(t.id)}
-            className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${activeTab === t.id
+            className={`flex items-center gap-1 px-3 py-2.5 text-xs sm:text-sm font-medium border-b-2 whitespace-nowrap transition-colors flex-shrink-0 ${activeTab === t.id
               ? "border-brand-600 text-brand-700"
               : "border-transparent text-slate-500 hover:text-slate-700"
               }`}>
             {t.label}
             {t.count !== undefined && (
-              <span className={`text-[11px] rounded-full px-1.5 py-0.5 font-semibold ${activeTab === t.id ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-500"
+              <span className={`text-[10px] rounded-full px-1.5 py-0.5 font-semibold ${activeTab === t.id ? "bg-brand-600 text-white" : "bg-slate-100 text-slate-500"
                 }`}>{t.count}</span>
             )}
           </button>
@@ -559,7 +559,7 @@ export default function TripDetail() {
               </div>
 
               {/* Date + times */}
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input type="date" required value={iForm.activityDate}
                   onChange={e => setIForm(f => ({ ...f, activityDate: e.target.value }))}
                   className="rounded-xl border border-slate-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400" />
@@ -885,15 +885,15 @@ export default function TripDetail() {
               <h3 className="font-bold text-emerald-800 mb-3 flex items-center gap-2">
                 👥 Split Summary
               </h3>
-              <div className="grid grid-cols-3 gap-3 text-center text-sm">
+              <div className="grid grid-cols-3 gap-2 text-center text-sm">
                 {[
                   { l: "Total Spent", v: fmtMoney(expenseTotal) },
                   { l: "Travellers", v: trip.travelerCount || 1 },
                   { l: "Per Person", v: fmtMoney(expenseTotal / (trip.travelerCount || 1)) },
                 ].map(s => (
-                  <div key={s.l} className="bg-white rounded-xl p-2.5">
-                    <p className="font-extrabold text-emerald-700">{s.v}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">{s.l}</p>
+                  <div key={s.l} className="bg-white rounded-xl p-2">
+                    <p className="font-extrabold text-emerald-700 text-sm truncate">{s.v}</p>
+                    <p className="text-[10px] text-slate-400 mt-0.5 leading-tight">{s.l}</p>
                   </div>
                 ))}
               </div>

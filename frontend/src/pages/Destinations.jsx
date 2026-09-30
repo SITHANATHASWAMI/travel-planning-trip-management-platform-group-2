@@ -360,7 +360,7 @@ export default function Destinations() {
               </p>
 
               {/* Mini stat row */}
-              <div className="flex gap-6 mt-6">
+              <div className="flex flex-wrap gap-4 sm:gap-6 mt-6">
                 {[
                   { label: "Destinations", value: allDestinations.length, icon: "📍" },
                   { label: "Countries", value: uniqueCountries, icon: "🌐" },

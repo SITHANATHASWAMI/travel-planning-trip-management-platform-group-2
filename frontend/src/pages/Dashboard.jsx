@@ -92,14 +92,14 @@ function KpiCard({ icon, label, value, sub, accent, trend }) {
   return (
     <div className={`relative bg-white border border-slate-200 rounded-2xl p-5 shadow-sm overflow-hidden`}>
       {/* accent bar top */}
-      <div className={`absolute top-0 left-0 right-0 h-1 ${accent}`} />
-      <div className="flex items-start justify-between mt-1">
-        <div>
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-1">{label}</p>
-          <p className="text-2xl font-extrabold text-slate-900 leading-none">{value}</p>
-          {sub && <p className="text-xs text-slate-500 mt-1">{sub}</p>}
+      <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-2xl ${accent}`} />
+      <div className="flex items-start justify-between mt-2">
+        <div className="flex-1 min-w-0 pr-2">
+          <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-1 truncate">{label}</p>
+          <p className="text-xl sm:text-2xl font-extrabold text-slate-900 leading-none truncate">{value}</p>
+          {sub && <p className="text-xs text-slate-500 mt-1 truncate">{sub}</p>}
         </div>
-        <div className={`w-11 h-11 rounded-xl flex items-center justify-center text-2xl ${accent.replace("bg-", "bg-opacity-10 bg-")} bg-opacity-10`}>
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0 bg-slate-50">
           {icon}
         </div>
       </div>
@@ -473,7 +473,7 @@ export default function Dashboard() {
                             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-base flex-shrink-0">
                               🗺️
                             </div>
-                            <span className="font-medium text-slate-800 truncate max-w-[140px]">
+                            <span className="font-medium text-slate-800 truncate max-w-[120px] sm:max-w-[180px]">
                               {trip.title}
                             </span>
                           </div>
@@ -513,7 +513,7 @@ export default function Dashboard() {
                   <p className="text-xs text-slate-400 text-center py-8">No trips yet</p>
                 ) : (
                   <div className="flex items-center gap-5">
-                    <div style={{ width: 100, height: 100, flexShrink: 0 }}>
+                    <div className="w-24 h-24 flex-shrink-0">
                       <Doughnut data={doughnutData} options={doughnutOpts} />
                     </div>
                     <div className="space-y-2 flex-1">
@@ -590,7 +590,7 @@ export default function Dashboard() {
                 </div>
               ) : (
                 <>
-                  <div style={{ height: 180 }}>
+                  <div className="h-44">
                     <Bar data={expenseBarData} options={barOpts} />
                   </div>
                   <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 pt-3 border-t border-slate-100">
@@ -685,7 +685,7 @@ export default function Dashboard() {
                   Need trips across multiple months to display trend.
                 </p>
               ) : (
-                <div style={{ height: 140 }}>
+                <div className="h-36">
                   <Line data={lineData} options={lineOpts} />
                 </div>
               )}
