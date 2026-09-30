@@ -60,8 +60,11 @@ public class TripService {
                 .toList();
     }
 
-    public Map<String, Object> getTripSummary() {
-        List<Trip> trips = tripRepository.findAll();
+    public Map<String, Object> getTripSummary(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        List<Trip> trips = tripRepository.findByOwnerIdOrTravelers_IdOrderByStartDateAsc(user.getId(), user.getId());
         long activePlans = trips.stream()
                 .filter(trip -> trip.getStatus() == TripStatus.PLANNED || trip.getStatus() == TripStatus.ONGOING)
                 .count();
